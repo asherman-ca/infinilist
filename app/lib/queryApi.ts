@@ -7,7 +7,7 @@ const query = async (prompt: string) => {
 			model: 'text-davinci-003',
 			prompt,
 			temperature: 0.9,
-			max_tokens: 1000,
+			max_tokens: 1500,
 			top_p: 1,
 			frequency_penalty: 0,
 			presence_penalty: 0,
