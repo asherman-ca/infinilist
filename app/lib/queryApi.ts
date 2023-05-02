@@ -6,8 +6,8 @@ const query = async (prompt: string) => {
 		.createCompletion({
 			model: 'text-davinci-003',
 			prompt,
-			temperature: 0.9,
-			max_tokens: 1500,
+			temperature: 1,
+			max_tokens: 2500,
 			top_p: 1,
 			frequency_penalty: 0,
 			presence_penalty: 0,

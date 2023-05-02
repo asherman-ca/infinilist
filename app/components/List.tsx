@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 
 const List = ({ list }: { list: string[] }) => {
@@ -9,7 +7,7 @@ const List = ({ list }: { list: string[] }) => {
 		<div className='flex flex-col gap-8'>
 			<div className='flex flex-col gap-2'>
 				<h2 className='text-4xl font-bold'>{title}</h2>
-				<span>The Ultimate Guide to {title[0].split('0')[1]}</span>
+				<span>The Ultimate Guide to the {title[0].split('0')[1]}</span>
 				<div className='flex gap-2 items-center'>
 					<Image
 						src={'/ChatGPT_logo.svg.png'}
