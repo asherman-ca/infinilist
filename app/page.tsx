@@ -10,10 +10,10 @@ const fetchLists = async () => {
 		const data = await res.json()
 		return data
 	} catch (err) {
-		return {
-			data: [],
-		}
 		console.log(err)
+		return {
+			data: '',
+		}
 	}
 }
 
