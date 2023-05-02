@@ -5,7 +5,9 @@ import List from './components/List'
 const fetchLists = async () => {
 	try {
 		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_HOST_URL}/api/openai/getLists`
+			`${
+				process.env.NEXT_PUBLIC_HOST_URL || 'http://localhost:3000'
+			}/api/openai/getLists`
 		)
 		const data = await res.json()
 		return data
