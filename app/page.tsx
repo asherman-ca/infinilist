@@ -1,116 +1,33 @@
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import List from './components/List'
 
-const inter = Inter({ subsets: ['latin'] })
+export const revalidate = 1
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+const fetchLists = async () => {
+	const res = await fetch('http://localhost:3000/api/openai/getLists')
+	const data = await res.json()
+	return data
+}
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+export default async function Home() {
+	// const lists = await fetchLists()
+	// console.log(lists)
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+	const lists = {
+		data: 'Top 10 Rock Instruments; Electric Guitar-An electric guitar is a type of guitar that uses magnetic pickups to convert the vibration of its strings into electrical signals that can then be amplified to create sound; Bass-The electric bass guitar is a stringed instrument played primarily with the fingers or thumb, by plucking, slapping, popping, strumming, tapping, thumping, or picking with a plectrum; Drums-The drum is a member of the percussion group of musical instruments, as opposed to string instruments, wind instruments, and horn instruments; Acoustic Guitar-An acoustic guitar is a type of guitar that utilizes acoustical techniques such as resonance and sound projection to make the instrument louder without relying on electronic amplification; Keyboards-A keyboard instrument is an instrument played using a keyboard, a row of levers which are pressed by the fingers; Saxophone-The saxophone is a family of woodwind instruments usually made of brass and played with a single-reed mouthpiece; Violin-The violin is a bowed string instrument with four strings tuned in perfect fifths; Clarinet-The clarinet is a single-reed woodwind instrument that is used in jazz, classical, popular music and other genres of music across the world; Electric Bass-An electric bass guitar is an electric stringed instrument similar in design to an electric guitar, but with a longer neck and scale length, and four, five, or six strings; Trumpet-The trumpet is a brass instrument commonly used in classical and jazz ensembles; &Top 10 Unique Plumbing Fixtures; Smart Toilet-Smart toilets are computerized toilets that use an array of sensors and actuators to provide extra features and functions beyond a typical toilet; Waterfall Tub-A waterfall tub is an advanced shower fixture that drains water from the tub in a unique pattern; Sensor Faucet-Sensor faucets are automatic faucets that use a sensor to detect when someone is standing at the sink; Wall Mounted Toilet-Wall mounted toilets are toilets that are mounted directly on the wall, instead of being mounted on the floor; Rain Shower Heads-Rain shower heads are a modern shower fixture that releases water in a rain-like pattern; Handheld Shower Heads-Handheld shower heads are shower heads with a long hose attached, which can be used to direct water to different areas of the body; Bidet-A bidet is a sanitary fixture used to clean oneself after using the toilet; Dual Shower Head-A dual shower head is a shower head with two nozzles, one on either side, which can be used to direct water to different areas of the body; Clawfoot Tub-A clawfoot tub is an antique style of bathtub that has a large, deep tub and four legs; Soaking Tub-A soaking tub is a large, deep bathtub, typically made of cast iron or acrylic, and designed for long, leisurely baths; &Top 10 Alternative Energy Sources; Solar-Solar power is the direct conversion of sunlight into electricity, either directly using photovoltaics, or indirectly using concentrated solar power; Wind-Wind power is the use of air flow through turbines to generate electricity; Geothermal-Geothermal energy is thermal energy generated and stored in the Earth; Biomass-Biomass is organic material derived from animals and plants that can be used as fuel or to produce electricity; Hydropower-Hydropower is a type of renewable energy that utilizes the power of falling water to generate electricity; Tidal-Tidal power, also known as tidal energy, is a form of hydropower that converts the energy of the tides into electricity or other useful forms of power; Wave-Wave power is the capture of energy of wind waves to do useful work, such as electricity generation, water desalination, or pumping water; Fuel Cells-A fuel cell is an electrochemical energy converter that produces electricity from a fuel, such as hydrogen or other non-renewable fuels; Biofuel-Biofuel is a type of fuel that is derived from biomass, such as plant matter, animal fat, and food waste; Nuclear-Nuclear power is the use of sustained nuclear fission to generate heat and electricity;',
+	}
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+	const trimmed = lists.data.replace(/(\r\n|\n|\r)/gm, '')
+	const splits = trimmed.split('&')
+	// const ListOne = splits[0].split(';')
+	// const ListTwo = splits[1].split(';')
+	// const ListThree = splits[3].split(';')
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+	return (
+		<main>
+			{splits.map((list, idx) => (
+				<List key={idx} list={list.split(';').slice(0, 10)} />
+			))}
+		</main>
+	)
 }
