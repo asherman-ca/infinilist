@@ -19,7 +19,7 @@ const List = async ({ list }: { list: string[] }) => {
 				} catch (err) {
 					console.log(err)
 				}
-				console.log('image', image?.photos[0].src.original)
+
 				return (
 					<li key={`${title} ${idx}`} className='flex flex-col gap-4'>
 						{image && (
@@ -31,7 +31,7 @@ const List = async ({ list }: { list: string[] }) => {
 							// 	className='h-lg w-auto rounded-md'
 							// />
 							<Image
-								src={image?.photos[0].src.landscape}
+								src={image?.photos[0]?.src?.landscape}
 								alt='image'
 								height={200}
 								width={200}
@@ -41,7 +41,7 @@ const List = async ({ list }: { list: string[] }) => {
 						<h3 className='font-bold text-2xl'>
 							{idx + 1}. {itemArr[0]}
 						</h3>
-						<p className='text-lg'>{itemArr[1]}</p> i love chat GPT
+						<p className='text-lg'>{itemArr[1]}</p>
 					</li>
 				)
 			})
