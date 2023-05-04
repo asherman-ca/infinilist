@@ -2,6 +2,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import query from '@/app/lib/queryApi'
 
+export const config = {
+	runtime: 'edge',
+}
+
 type Data = {
 	data: string
 }
