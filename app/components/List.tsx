@@ -10,10 +10,15 @@ const List = async ({ list }: { list: string[] }) => {
 		await Promise.all(
 			list.map(async (item, idx) => {
 				let itemArr = item.trim().split('!')
-				let image = await client.photos.search({
-					query: itemArr[0],
-					per_page: 1,
-				})
+				let image
+				try {
+					image = await client.photos.search({
+						query: itemArr[0],
+						per_page: 1,
+					})
+				} catch (err) {
+					console.log(err)
+				}
 				console.log('image', image?.photos[0].src.original)
 				return (
 					<li key={`${title} ${idx}`} className='flex flex-col gap-4'>
