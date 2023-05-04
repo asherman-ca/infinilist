@@ -41,7 +41,7 @@ const List = async ({ list }: { list: string[] }) => {
 						<h3 className='font-bold text-2xl'>
 							{idx + 1}. {itemArr[0]}
 						</h3>
-						<p className='text-lg'>{itemArr[1]}</p> i love chat GPT
+						<p className='text-lg'>{itemArr[1]}</p>
 					</li>
 				)
 			})
