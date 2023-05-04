@@ -1,7 +1,46 @@
 import Image from 'next/image'
 
-const List = ({ list }: { list: string[] }) => {
+import { createClient } from 'pexels'
+const client = createClient(process.env.NEXT_PUBLIC_PEXELS_API_KEY!)
+
+const List = async ({ list }: { list: string[] }) => {
 	const title = list.splice(0, 1)
+
+	const filledItems = async () =>
+		await Promise.all(
+			list.map(async (item, idx) => {
+				let itemArr = item.trim().split('!')
+				let image = await client.photos.search({
+					query: itemArr[0],
+					per_page: 1,
+				})
+				console.log('image', image?.photos[0].src.original)
+				return (
+					<li key={`${title} ${idx}`} className='flex flex-col gap-4'>
+						{image && (
+							// <img
+							// 	src={image?.photos[0].src.landscape}
+							// 	alt=''
+							// 	// height={'100px'}
+							// 	// width={'100px'}
+							// 	className='h-lg w-auto rounded-md'
+							// />
+							<Image
+								src={image?.photos[0].src.landscape}
+								alt='image'
+								height={200}
+								width={200}
+								className='h-lg w-auto'
+							/>
+						)}
+						<h3 className='font-bold text-2xl'>
+							{idx + 1}. {itemArr[0]}
+						</h3>
+						<p className='text-lg'>{itemArr[1]}</p> i love chat GPT
+					</li>
+				)
+			})
+		)
 
 	return (
 		<div className='flex flex-col gap-8'>
@@ -25,7 +64,8 @@ const List = ({ list }: { list: string[] }) => {
 				</div>
 			</div>
 			<ul className='flex flex-col gap-4'>
-				{list.map((item, idx) => {
+				{await filledItems()}
+				{/* {list.map((item, idx) => {
 					let itemArr = item.trim().split('!')
 					return (
 						<li key={`${title} ${idx}`} className='flex flex-col'>
@@ -35,7 +75,7 @@ const List = ({ list }: { list: string[] }) => {
 							<p className='text-lg'>{itemArr[1]}</p>
 						</li>
 					)
-				})}
+				})} */}
 			</ul>
 		</div>
 	)
