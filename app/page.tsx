@@ -10,7 +10,7 @@ const fetchLists = async () => {
 			}/api/openai/getLists`,
 			{
 				next: {
-					revalidate: 9000,
+					revalidate: 0,
 				},
 			}
 		)
