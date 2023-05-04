@@ -26,7 +26,7 @@ const List = ({ list }: { list: string[] }) => {
 			</div>
 			<ul className='flex flex-col gap-4'>
 				{list.map((item, idx) => {
-					let itemArr = item.trim().split(':')
+					let itemArr = item.trim().split('!')
 					return (
 						<li key={`${title} ${idx}`} className='flex flex-col'>
 							<h3 className='font-bold text-2xl'>
