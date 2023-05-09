@@ -22,14 +22,7 @@ const List = async ({ list }: { list: string[] }) => {
 
 				return (
 					<li key={`${title} ${idx}`} className='flex flex-col gap-4'>
-						{image && (
-							// <img
-							// 	src={image?.photos[0].src.landscape}
-							// 	alt=''
-							// 	// height={'100px'}
-							// 	// width={'100px'}
-							// 	className='h-lg w-auto rounded-md'
-							// />
+						{image?.photos?.length > 0 && (
 							<Image
 								src={image?.photos[0]?.src?.landscape}
 								alt='image'
